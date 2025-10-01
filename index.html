@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nombre del Negocio — Moderno & Elegante</title>
+
+  <!-- Google Font (neutra y moderna) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724;            /* deep night */
+      --card:#0b1220;          /* dark card */
+      --muted:#94a3b8;
+      --accent1:#7c3aed;       /* purple */
+      --accent2:#06b6d4;       /* cyan */
+      --glass: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.06);
+      --radius: 14px;
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #081028 0%, #071024 40%), var(--bg);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width:100%; display:block; }
+
+    /* Container */
+    .container{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    /* Header / Hero */
+    header.site-header{
+      padding:28px 0;
+    }
+    .brand {
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+    .logo {
+      width:56px; height:56px; border-radius:12px;
+      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 20px rgba(12,18,40,0.6);
+      font-weight:700; color:white;
+    }
+    nav.top-nav {
+      margin-top:16px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    nav.top-nav a{
+      padding:8px 12px;
+      border-radius:10px;
+      color:var(--muted);
+      font-weight:600;
+      transition: all .18s ease;
+    }
+    nav.top-nav a:hover{
+      color:white;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      transform: translateY(-3px);
+    }
+
+    /* Hero big */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:32px;
+      align-items:center;
+      margin:28px 0 32px 0;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:34px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .hero h1{ font-size: clamp(24px, 3.6vw, 42px); margin:0 0 10px 0; letter-spacing:-0.02em;}
+    .hero p.lead{ color:var(--muted); margin:0 0 18px 0; font-size:1.05rem;}
+    .cta-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+
+    .btn {
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 16px; border-radius:12px; cursor:pointer;
+      font-weight:600;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      color: #0b1220;
+      box-shadow: 0 8px 20px rgba(124,58,237,0.18);
+    }
+    .btn-outline{
+      border: 1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+    }
+    .btn:hover{ transform: translateY(-4px); }
+
+    /* Quick info card */
+    .info {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .info .item{
+      background:var(--glass);
+      border-radius: 10px;
+      padding:12px;
+      font-weight:600;
+      color:var(--muted);
+    }
+
+    /* Gallery */
+    .section-title{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px;}
+    .section-title h2{ margin:0; font-size:1.35rem; }
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .tile{
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+      aspect-ratio: 4/3;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      transition: transform .22s ease, box-shadow .22s ease;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    }
+    .tile img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .tile:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 14px 32px rgba(2,6,23,0.7); }
+
+    /* Services */
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.03);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 14px 28px rgba(2,6,23,0.6); }
+
+    /* Contact form */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:20px;
+      align-items:start;
+    }
+    form.contact-form{
+      background: var(--card);
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    label{ display:block; color:var(--muted); font-size:0.95rem; margin-bottom:6px; font-weight:600;}
+    input[type="text"], input[type="email"], textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.04);
+      background: transparent;
+      color: #e6eef8;
+      font-size:0.95rem;
+      margin-bottom:12px;
+      resize:vertical;
+    }
+    .note { color:var(--muted); font-size:0.9rem; margin-bottom:8px; }
+    .socials {
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .social-btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; font-weight:600;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+    }
+
+    /* Footer */
+    footer.site-footer{
+      margin-top:40px;
+      padding:20px 0;
+      color:var(--muted);
+      text-align:center;
+      font-size:0.95rem;
+    }
+
+    /* Lightbox modal */
+    .lightbox {
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      background: rgba(3,6,15,0.7);
+      z-index:1200; padding:28px; opacity:0; pointer-events:none; transition: opacity .18s ease;
+    }
+    .lightbox.show{ opacity:1; pointer-events:auto; }
+    .lightbox .modal{
+      max-width:1000px; width:100%; border-radius:12px; overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 30px 80px rgba(2,6,23,0.8);
+    }
+    .modal img{ width:100%; height:auto; display:block; }
+    .modal .meta{
+      padding:12px 16px; display:flex; justify-content:space-between; align-items:center;
+      border-top:1px solid rgba(255,255,255,0.03);
+    }
+    .close-btn{ background:none; border:0; color:var(--muted); font-weight:700; cursor:pointer; padding:8px 12px; }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{ grid-template-columns: 1fr; }
+      .contact-wrap, .hero{ grid-template-columns: 1fr; }
+      .gallery-grid{ grid-template-columns: repeat(2,1fr); }
+      .services{ grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:640px){
+      .gallery-grid{ grid-template-columns: 1fr; }
+      nav.top-nav { gap:10px; }
+      .info{ grid-template-columns:1fr; }
+    }
+
+    /* subtle entrance animations */
+    .fade-up { transform: translateY(8px); opacity:0; transition: all .6s cubic-bezier(.2,.9,.2,1); }
+    .fade-up.show{ transform: translateY(0); opacity:1; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="site-header">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">NB</div>
+          <div>
+            <div style="font-weight:700;font-size:1.05rem;">Nombre del Negocio</div>
+            <div style="color:var(--muted);font-size:0.92rem;">Soluciones digitales & diseño</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center;">
+          <nav class="top-nav" aria-label="Navegación principal">
+            <a href="#inicio">Inicio</a>
+            <a href="#galeria">Galería</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio" aria-label="Inicio">
+      <div class="hero-card fade-up" id="heroCard">
+        <h1>Diseño y soluciones profesionales para tu negocio</h1>
+        <p class="lead">Creamos experiencias digitales elegantes y funcionales — branding, sitios web, diseño UX/UI y marketing digital.</p>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" id="hireBtn">Solicitar presupuesto</button>
+          <a class="btn btn-outline" href="#galeria">Ver Galería</a>
+        </div>
+
+        <div class="info" style="margin-top:18px;">
+          <div class="item">📍 Ubicación: Ciudad, País</div>
+          <div class="item">⏱️ Horario: Lun–Vie 9:00–18:00</div>
+        </div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px;">
+        <div class="hero-card fade-up" style="padding:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-weight:700">Lo que hacemos</div>
+              <div style="color:var(--muted);font-size:0.95rem">Soluciones a medida, rápido y con estética.</div>
+            </div>
+            <div style="text-align:right;font-weight:700;color:var(--accent2);">Confianza</div>
+          </div>
+          <div style="margin-top:12px;font-size:0.95rem;color:var(--muted)">Proyectos entregados, soporte continuo y enfoque en resultados.</div>
+        </div>
+
+        <div class="hero-card fade-up" style="padding:12px;">
+          <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;">
+            <div style="font-weight:700">Contacto rápido</div>
+            <div style="font-weight:700">📞 +1 (555) 123-4567</div>
+          </div>
+          <div style="margin-top:10px;color:var(--muted);font-size:0.95rem">O usa las redes sociales para consultas rápidas.</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Gallery -->
+    <section id="galeria" style="margin-top:6px;">
+      <div class="section-title">
+        <h2>Galería</h2>
+        <div style="color:var(--muted);font-size:0.95rem">Proyectos destacados</div>
+      </div>
+
+      <div class="gallery-grid" id="gallery">
+        <!-- Replace these images with tus propias fotos. Using data-src to indicate placeholders -->
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Proyecto 1 — Branding & web" loading="lazy">
+        </div>
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Proyecto 2 — App mobile" loading="lazy">
+        </div>
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="Proyecto 3 — Dashboard" loading="lazy">
+        </div>
+
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop" alt="Proyecto 4 — Fotografía" loading="lazy">
+        </div>
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop" alt="Proyecto 5 — Diseño gráfico" loading="lazy">
+        </div>
+        <div class="tile" tabindex="0" data-full="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Proyecto 6 — Identidad visual" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="servicios" style="margin-top:28px;">
+      <div class="section-title">
+        <h2>Servicios</h2>
+        <div style="color:var(--muted);font-size:0.95rem">Qué podemos hacer por tu negocio</div>
+      </div>
+
+      <div class="services">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">Diseño & Branding</h3>
+          <p style="color:var(--muted);margin:0;">Identidad visual, logotipos, guías de estilo y diseño de marketing.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">Desarrollo Web</h3>
+          <p style="color:var(--muted);margin:0;">Sitios rápidos, responsivos y optimizados para conversión.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">Estrategia Digital</h3>
+          <p style="color:var(--muted);margin:0;">SEO básico, campañas y análisis de rendimiento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contacto" style="margin-top:28px;">
+      <div class="section-title">
+        <h2>Contacto</h2>
+        <div style="color:var(--muted);font-size:0.95rem">Hablemos sobre tu proyecto</div>
+      </div>
+
+      <div class="contact-wrap">
+        <form class="contact-form" id="contactForm" onsubmit="return handleSend(event)" aria-label="Formulario de contacto">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1; min-width:160px;">
+              <label for="name">Nombre</label>
+              <input id="name" name="name" type="text" required placeholder="Tu nombre completo">
+            </div>
+            <div style="flex:1; min-width:160px;">
+              <label for="email">Correo</label>
+              <input id="email" name="email" type="email" required placeholder="tu@email.com">
+            </div>
+          </div>
+
+          <label for="subject">Asunto</label>
+          <input id="subject" name="subject" type="text" placeholder="Ej: Nuevo sitio web, cotización">
+
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="6" placeholder="Cuéntanos brevemente sobre tu proyecto..." required></textarea>
+
+          <!-- simple honeypot to reduce spam -->
+          <input type="text" name="website" id="website" style="display:none" autocomplete="off">
+
+          <div style="display:flex;gap:10px;align-items:center;margin-top:8px;">
+            <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+            <div class="note" id="formNote" aria-live="polite"></div>
+          </div>
+        </form>
+
+        <aside style="display:flex;flex-direction:column;gap:12px;">
+          <div style="background:var(--glass-strong);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);">
+            <div style="font-weight:700">Información</div>
+            <div style="color:var(--muted);margin-top:8px;">Email: contacto@negocio.com<br>Tel: +1 (555) 123-4567</div>
+            <div style="margin-top:10px;color:var(--muted);">Dirección: Calle Ejemplo 123, Ciudad</div>
+          </div>
+
+          <div style="background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);">
+            <div style="font-weight:700;margin-bottom:8px;">Síguenos</div>
+            <div class="socials">
+              <a class="social-btn" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <!-- Facebook SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.34 2 1.86 6.48 1.86 12.07 1.86 17.01 5.67 20.67 10.3 21.58v-7.23H8.12v-3.48h2.18V9.2c0-2.16 1.3-3.35 3.28-3.35.95 0 1.95.17 1.95.17v2.14h-1.09c-1.07 0-1.4.66-1.4 1.34v1.6h2.38l-.38 3.48h-2v7.23c4.63-.91 8.44-4.57 8.44-9.51z" fill="currentColor"/></svg>
+                Facebook
+              </a>
+              <a class="social-btn" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5A4.5 4.5 0 1 0 16.5 13 4.5 4.5 0 0 0 12 8.5zm5.5-3a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"/></svg>
+                Instagram
+              </a>
+              <a class="social-btn" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.94 6.94H3.5V21h3.44zM5.22 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM21 14.5v6.5h-3.44v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.47-2.16 2.97V21H9.47V7.5H12.9v1.86h.05c.47-.9 1.62-1.84 3.33-1.84 3.56 0 4.67 2.34 4.67 5.12z" fill="currentColor"/></svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(90deg, rgba(124,58,237,0.08), rgba(6,182,212,0.06)); padding:12px; border-radius:12px;">
+            <div style="font-weight:700">Propuesta</div>
+            <div style="color:var(--muted);margin-top:8px;font-size:0.95rem;">Solicita una cotización sin compromiso. Respuesta en 1–2 días hábiles.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div>&copy; <span id="year"></span> Nombre del Negocio. Todos los derechos reservados.</div>
+        <div style="color:var(--muted)">Diseño y desarrollo profesional • Contacto: contacto@negocio.com</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Vista de imagen">
+    <div class="modal" role="document">
+      <img id="lightboxImg" src="" alt="">
+      <div class="meta">
+        <div id="imgCaption" style="color:var(--muted);font-size:0.95rem;"></div>
+        <div>
+          <button class="close-btn" id="prevBtn" title="Anterior">◀</button>
+          <button class="close-btn" id="nextBtn" title="Siguiente">▶</button>
+          <button class="close-btn" id="closeLightbox" title="Cerrar">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // small utilities
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    // Fade-in elements on load
+    window.addEventListener('load', () => {
+      setTimeout(()=> {
+        document.querySelectorAll('.fade-up').forEach((el,i) => {
+          setTimeout(()=> el.classList.add('show'), i*80);
+        });
+      }, 120);
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // Gallery lightbox
+    const tiles = $$('.tile');
+    const lightbox = $('#lightbox');
+    const lbImg = $('#lightboxImg');
+    const caption = $('#imgCaption');
+    let currentIndex = -1;
+    const images = tiles.map(t => ({ full: t.dataset.full || t.querySelector('img').src, alt: t.querySelector('img').alt || 'Imagen' }));
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = images[index];
+      lbImg.src = img.full;
+      lbImg.alt = img.alt;
+      caption.textContent = img.alt;
+      lightbox.classList.add('show');
+      lightbox.setAttribute('aria-hidden','false');
+      // focus trap-ish
+      $('#closeLightbox').focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      lightbox.setAttribute('aria-hidden','true');
+      lbImg.src = '';
+    }
+
+    tiles.forEach((tile, idx) => {
+      tile.addEventListener('click', ()=> openLightbox(idx));
+      tile.addEventListener('keydown', (e)=> { if(e.key === 'Enter') openLightbox(idx); });
+    });
+
+    $('#closeLightbox').addEventListener('click', closeLightbox);
+    $('#prevBtn').addEventListener('click', ()=> openLightbox((currentIndex - 1 + images.length) % images.length));
+    $('#nextBtn').addEventListener('click', ()=> openLightbox((currentIndex + 1) % images.length));
+    lightbox.addEventListener('click', (e)=> { if(e.target === lightbox) closeLightbox(); });
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('show')) return;
+      if(e.key === 'ArrowLeft') $('#prevBtn').click();
+      if(e.key === 'ArrowRight') $('#nextBtn').click();
+      if(e.key === 'Escape') $('#closeLightbox').click();
+    });
+
+    // Contact form handling: build mailto or show message
+    function handleSend(e){
+      e.preventDefault();
+      const name = $('#name').value.trim();
+      const email = $('#email').value.trim();
+      const subject = $('#subject').value.trim() || 'Consulta desde web';
+      const message = $('#message').value.trim();
+      const honeypot = $('#website').value.trim();
+      const note = $('#formNote');
+
+      if(honeypot){
+        note.textContent = 'Envío detectado como spam.';
+        return false;
+      }
+      if(!name || !email || !message){
+        note.textContent = 'Por favor completa los campos obligatorios.';
+        return false;
+      }
+
+      // Prepare mailto (simple, client-side)
+      const to = 'contacto@negocio.com'; // reemplaza por tu email real
+      const body = encodeURIComponent(Nombre: ${name}\nCorreo: ${email}\n\n${message});
+      const mailto = mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body};
+
+      // Open mail client:
+      window.location.href = mailto;
+
+      // show temporary feedback
+      note.textContent = 'Se abrió tu cliente de correo para enviar el mensaje. Si no se abre, copia y pega el email: contacto@negocio.com';
+      return false;
+    }
+
+    // CTA button scroll to contact & focus
+    $('#hireBtn').addEventListener('click', ()=> {
+      document.querySelector('#contacto').scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=> $('#name').focus(), 600);
+    });
+
+    // If you'd like to integrate a real backend later:
+    // Replace handleSend with fetch('/api/contact', {method:'POST', body: JSON.stringify({...})})
+  </script>
+</body>
+</html>
